@@ -14,7 +14,7 @@ public class DistanceServiceImpl implements DistanceService {
     public double distance(Trip trip) {
         List<Location> hops = trip.getHops();
         double finalDistance = 0;
-        for (int i = 0; i < hops.size() - 2; i++) {
+        for (int i = 0; i < hops.size() - 1; i++) {
             finalDistance = finalDistance + distance(hops.get(i), hops.get(i + 1));
         }
         return finalDistance;
@@ -23,26 +23,29 @@ public class DistanceServiceImpl implements DistanceService {
     @Override
     public double distance(Location source, Location destination) {
         //order it
-        if (source.compareTo(destination) < -1) {
+        if (source.compareTo(destination) > 1) {
             Location temp = source;
             source = destination;
             destination = temp;
         }
-        double value = 0;
-        if (source == Location.pune && destination == Location.bangalore) {
-            value = 1000.0;
+
+        if (source == Location.bangalore && destination == Location.pune) {
+            return 1000.0;
         }
-        if (source == Location.pune && destination == Location.mumbai) {
-            value = 200.0;
+        if (source == Location.mumbai && destination == Location.pune) {
+            return 200.0;
         }
-        if (source == Location.mumbai && destination == Location.delhi) {
-            value = 1000.0;
+        if (source == Location.bangalore && destination == Location.mumbai) {
+            return 1200.0;
+        }
+        if (source == Location.delhi && destination == Location.mumbai) {
+            return 1000.0;
         }
         if (source == Location.mumbai && destination == Location.chennai) {
-            value = 1234.5;
+            return 1234.5;
         }
 
         //TODO - throw illegal argument if zero
-        return value;
+        return 0;
     }
 }

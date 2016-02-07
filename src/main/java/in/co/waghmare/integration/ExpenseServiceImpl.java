@@ -7,16 +7,14 @@ import in.co.waghmare.core.services.DistanceService;
 import in.co.waghmare.core.services.ExpenseService;
 import in.co.waghmare.core.services.RateService;
 
-import java.math.BigInteger;
-
 /**
  * Created by ashishw on 7/2/16.
  */
 public class ExpenseServiceImpl implements ExpenseService {
 
-    DistanceService distanceService;
+    DistanceService distanceService = new DistanceServiceImpl();
 
-    RateService rateService;
+    RateService rateService = new RateServiceImpl();
 
     @Override
     public Money calculate(Trip trip) {
@@ -25,6 +23,6 @@ public class ExpenseServiceImpl implements ExpenseService {
         int perKm = rate.getValue();
         double rupees = finaldistance * rate.getValue();
         //TODO return new Money(new Money()),);
-        return new Money("rupees", (int) rupees,0);
+        return new Money("rupees", (int) rupees);
     }
 }

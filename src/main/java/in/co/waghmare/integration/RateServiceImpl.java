@@ -12,8 +12,6 @@ public class RateServiceImpl implements RateService {
 
         Rate rate = null;
 
-        //A vehicle can be rented for a trip. Vehicle can be a SUV, car, van, bus, etc.
-
         Vehicle vehicle = trip.getVehicle();
         //The standard rate for a petrol vehicle for a standard trip is 15 Rs/Km
         if (vehicle.getFuelType() == FUEL_TYPE.PETROL) {
@@ -36,8 +34,10 @@ public class RateServiceImpl implements RateService {
 
         //Additional charges of 1 Rs/Km/Person are charged if number of passengers exceeds the max limit of a
         //vehicle.
-        Passengers additional = vehicle.getMaxCapacity().minus(trip.getPassengers());
-        rate = rate.add(additional.getSize() * 1);
+        Passengers additional = trip.getPassengers().minus(vehicle.getMaxCapacity());
+        if (additional.getSize() > 0) {
+            rate = rate.add(additional.getSize() * 1);
+        }
         return rate;
     }
 }

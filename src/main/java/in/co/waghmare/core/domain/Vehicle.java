@@ -20,15 +20,7 @@ public class Vehicle {
         return this;
     }
 
-    public static Vehicle ofModel(String modelName) {
-        switch (modelName.toUpperCase()) {
-            case "SWIFT":
-                Vehicle vehicle = new Vehicle();
-                vehicle.maxCapacity = Passengers.size(4);
-                return vehicle;
-        }
-        return new Vehicle();
-    }
+
 
     public FUEL_TYPE getFuelType() {
         return fuelType;
@@ -52,5 +44,15 @@ public class Vehicle {
         Car,
         Van,
         Bus;
+    }
+    // TODO can be moved to VehicleService
+    public static Vehicle ofModel(String modelName) {
+        switch (modelName.toUpperCase()) {
+            case "SWIFT":
+                Vehicle vehicle = new Vehicle();
+                vehicle.maxCapacity = Passengers.size(4);
+                return vehicle;
+        }
+        return new Vehicle();
     }
 }
