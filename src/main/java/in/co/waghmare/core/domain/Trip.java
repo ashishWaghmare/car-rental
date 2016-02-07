@@ -21,6 +21,11 @@ public class Trip {
 
     private final Vehicle vehicle;
     private final Passengers passengers;
+
+    public List<Location> getHops() {
+        return hops;
+    }
+
     private List<Location> hops;
     private boolean isComplete = false;
 
@@ -47,5 +52,6 @@ public class Trip {
             goes(location);
             isComplete = true;
         }
+        return this;
     }
 }

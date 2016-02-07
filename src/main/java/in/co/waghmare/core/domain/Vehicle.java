@@ -27,6 +27,7 @@ public class Vehicle {
                 vehicle.maxCapacity = Passengers.size(4);
                 return vehicle;
         }
+        return new Vehicle();
     }
 
     public FUEL_TYPE getFuelType() {
